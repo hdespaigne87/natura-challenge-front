@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/admin.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html">
+	
+	<ui:define name="head">
+		<title>Natura Challenge</title>
+	</ui:define>
+	
+	<ui:define name="head-end">
+		<h:outputStylesheet library="css" name="custom.css"/>
+		<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+	</ui:define>
+
+	<ui:define name="logo-lg">
+        Natura Challenge
+    </ui:define>
+
+	<ui:define name="logo-mini">
+        NCH
+    </ui:define>
+
+	<ui:define name="menu">
+		<ul class="sidebar-menu" data-widget="tree">
+			<li><p:link href="/index.xhtml" onclick="clearBreadCrumbs()">
+					<i class="fa fa-home"></i>
+					<span>Home</span>
+				</p:link></li>
+			<li class="header">Algorithms Challenge</li>
+			<li><p:link href="/challenges/algorithms/highest_repeating_word.xhtml">
+					<i class="fa fa-cogs"></i>
+					<span>Highest Repeating Word</span>
+				</p:link></li>
+			<li><p:link href="/challenges/algorithms/fibonacci.xhtml">
+				<i class="fa fa-cogs"></i>
+				<span>Fibonacci</span>
+			</p:link></li>
+			<li><p:link href="/challenges/algorithms/smallest_largest_number.xhtml">
+				<i class="fa fa-cogs"></i>
+				<span>Smallest and Largest Number</span>
+			</p:link></li>
+			<li class="header">NURSEAPP Challenge</li>
+			<li><p:link href="/challenges/nurseapp/user_story_1.xhtml">
+					<i class="fa fa-cogs"></i>
+					<span>User Story 1</span>
+				</p:link></li>
+			<li><p:link href="/challenges/nurseapp/user_story_2.xhtml">
+					<i class="fa fa-cogs"></i>
+					<span>User Story 2</span>
+				</p:link></li>
+			<li><p:link href="/challenges/nurseapp/user_story_3.xhtml">
+					<i class="fa fa-cogs"></i>
+					<span>User Story 3</span>
+				</p:link></li>
+		</ul>
+	</ui:define>
+
+	<ui:define name="body">
+
+	</ui:define>
+
+</ui:composition>

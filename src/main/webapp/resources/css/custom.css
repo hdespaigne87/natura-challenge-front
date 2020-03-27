@@ -1,0 +1,10 @@
+.label-opcional {
+	margin-left: 5px;
+	font-style: italic;
+	opacity: 60%;
+	font-size: 12px !important;
+}
+
+section.content-header {
+	display: none;
+}
