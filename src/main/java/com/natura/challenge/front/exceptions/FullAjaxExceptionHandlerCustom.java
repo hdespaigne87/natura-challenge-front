@@ -32,7 +32,7 @@ public class FullAjaxExceptionHandlerCustom extends FullAjaxExceptionHandler {
 		request.getSession().setAttribute("exception_error_code", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		request.getSession().setAttribute("exception_ajax_request", PrimeFaces.current().isAjaxRequest() ? "Si" : "No");
 		try {
-			Faces.redirect("/500.xhtml");
+			Faces.redirect((request.getContextPath().equals("/") ? "" : request.getContextPath()) + "/500.xhtml");
 		} catch (IOException e) {
 			throw new IllegalArgumentException(ERROR_DEFAULT_LOCATION_MISSING);
 		}
