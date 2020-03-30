@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <div id="datatable">
+        <p>For filter some records, write your search criteria into the boxes and press Enter</p>
+        <p:dataTable var="record"
+                     value="#{userStory2Controller.patients}"
+                     widgetVar="tablePatient" paginator="true" styleClass="header-right"
+                     currentPageReportTemplate="{startRecord} - {endRecord} de {totalRecords}"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="5,10,15" rows="10" rowKey="#{record.id}"
+                     lazy="true">
+
+            <f:facet name="header">
+                Patients
+            </f:facet>
+
+            <p:column filterBy="#{record.dni}"
+                      sortBy="#{record.dni}" headerText="DNI"
+                      priority="1">
+                <f:facet name="filter">
+                    <p:inputText maxlength="100"
+                                 onkeypress="if (event.keyCode == 13) { this.blur(); return false; }">
+                        <p:ajax oncomplete="PF('tablePatient').filter()" />
+                    </p:inputText>
+                </f:facet>
+                <p:outputLabel value="#{record.dni}"/>
+            </p:column>
+
+            <p:column filterBy="#{record.name}"
+                      sortBy="#{record.name}" headerText="Name"
+                      priority="1">
+                <f:facet name="filter">
+                    <p:inputText maxlength="100"
+                                   onkeypress="if (event.keyCode == 13) { this.blur(); return false; }">
+                        <p:ajax oncomplete="PF('tablePatient').filter()" />
+                    </p:inputText>
+                </f:facet>
+                <p:outputLabel value="#{record.name}"/>
+            </p:column>
+
+            <p:column filterBy="#{record.age}"
+                      sortBy="#{record.age}" headerText="Age"
+                      priority="1">
+                <f:facet name="filter">
+                    <p:inputNumber minValue="0" maxValue="150" decimalPlaces="0" converter="javax.faces.Integer"
+                                   onkeypress="if (event.keyCode == 13) { this.blur(); return false; }">
+                        <p:ajax oncomplete="PF('tablePatient').filter()" />
+                    </p:inputNumber>
+                </f:facet>
+                <p:outputLabel value="#{record.age}"/>
+            </p:column>
+
+            <p:column headerText="Actions" width="70">
+                <p:commandButton icon="fa fa-cogs" title="Vital Signs"
+                                 styleClass="btn-success"
+                                 actionListener="#{userStory2Controller.listVitalSigns(record)}"
+                                 update="@form">
+                </p:commandButton>
+                <p:spacer width="5"/>
+            </p:column>
+        </p:dataTable>
+    </div>
+</ui:composition>

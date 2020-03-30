@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+>
+
+    <div class="ui-fluid">
+        <p:fieldset legend="Patient Data">
+            <div class="ui-sm-12 ui-g-4 ui-g-nopad">
+                <div class="ui-sm-12 ui-g-12">
+                    <p:outputLabel for="dni" value="DNI"/>
+                </div>
+                <div class="ui-sm-12 ui-g-12">
+                    <p:inputText id="dni" value="#{userStory1Controller.patient.dni}"
+                                 disabled="true">
+                    </p:inputText>
+                    <span class="help-block">
+                        <p:message for="dni"/>
+                    </span>
+                </div>
+            </div>
+            <div class="ui-sm-12 ui-g-4 ui-g-nopad">
+                <div class="ui-sm-12 ui-g-12">
+                    <p:outputLabel for="name" value="Name"/>
+                </div>
+                <div class="ui-sm-12 ui-g-12">
+                    <p:inputText id="name" value="#{userStory1Controller.patient.name}"
+                                 disabled="true">
+                    </p:inputText>
+                    <span class="help-block">
+                        <p:message for="name"/>
+                    </span>
+                </div>
+            </div>
+            <div class="ui-sm-12 ui-g-4 ui-g-nopad">
+                <div class="ui-sm-12 ui-g-12">
+                    <p:outputLabel for="age" value="Age (Years old)"/>
+                </div>
+                <div class="ui-sm-12 ui-g-12">
+                    <p:inputNumber id="age" decimalPlaces="0" value="#{userStory1Controller.patient.age}"
+                                   disabled="true">
+                    </p:inputNumber>
+                    <span class="help-block">
+                        <p:message for="age"/>
+                    </span>
+                </div>
+            </div>
+        </p:fieldset>
+        <p:spacer height="3"/>
+        <p:fieldset legend="Vital Signs Data">
+            <div class="ui-sm-12 ui-g-6 ui-g-nopad">
+                <div class="ui-sm-12 ui-g-12">
+                    <p:outputLabel for="registrationMoment" value="Registration Moment (MM/dd/yyyy HH:mm)"/>
+                </div>
+                <div class="ui-sm-12 ui-g-12">
+                    <p:calendar id="registrationMoment" value="#{userStory1Controller.vitalSign.registrationMoment}" pattern="MM/dd/yyyy HH:mm"
+                                required="true" requiredMessage="Required field" mask="99/99/9999 99:99"/>
+                    <span class="help-block"> 
+                        <p:message for="registrationMoment"/>
+                    </span>
+                </div>
+            </div>
+            <div class="ui-sm-12 ui-g-6 ui-g-nopad">
+                <div class="ui-sm-12 ui-g-12">
+                    <p:outputLabel for="bloodPressureSystolic" value="Blood Pressure Systolic"/>
+                </div>
+                <div class="ui-sm-12 ui-g-12">
+                    <p:inputNumber id="bloodPressureSystolic" maxValue="999" minValue="0" decimalPlaces="0" value="#{userStory1Controller.vitalSign.bloodPressureSystolic}"
+                                 required="true" requiredMessage="Required field">
+                    </p:inputNumber>
+                    <span class="help-block">
+                        <p:message for="bloodPressureSystolic"/>
+                    </span>
+                </div>
+            </div>
+            <div class="ui-sm-12 ui-g-6 ui-g-nopad">
+                <div class="ui-sm-12 ui-g-12">
+                    <p:outputLabel for="bloodPressureDiastolic" value="Blood Pressure Diastolic"/>
+                </div>
+                <div class="ui-sm-12 ui-g-12">
+                    <p:inputNumber id="bloodPressureDiastolic" maxValue="999" minValue="0" decimalPlaces="0" value="#{userStory1Controller.vitalSign.bloodPressureDiastolic}"
+                                   required="true" requiredMessage="Required field">
+                    </p:inputNumber>
+                    <span class="help-block">
+                        <p:message for="bloodPressureDiastolic"/>
+                    </span>
+                </div>
+            </div>
+            <div class="ui-sm-12 ui-g-6 ui-g-nopad">
+                <div class="ui-sm-12 ui-g-12">
+                    <p:outputLabel for="heartRate" value="Heart Rate (in beats per minute)"/>
+                </div>
+                <div class="ui-sm-12 ui-g-12">
+                    <p:inputNumber id="heartRate" maxValue="999" minValue="0" decimalPlaces="0" value="#{userStory1Controller.vitalSign.heartRate}"
+                                   required="true" requiredMessage="Required field">
+                    </p:inputNumber>
+                    <span class="help-block">
+                        <p:message for="heartRate"/>
+                    </span>
+                </div>
+            </div>
+        </p:fieldset>
+    </div>
+
+    <p:separator/>
+    <div id="main-buttons">
+        <p:commandButton value="Save" update="@form" icon="fa fa-check" actionListener="#{userStory1Controller.saveVitalSign()}"
+                         styleClass="btn-primary"/>
+        <p:spacer width="5"/>
+        <p:commandButton value="Go Back" styleClass="btn-fatal"
+                  actionListener="#{userStory1Controller.cancelVitalSignForm}" process="@this"
+                  update="@form"
+                  icon="fa fa-reply"/>
+    </div>
+
+</ui:composition>

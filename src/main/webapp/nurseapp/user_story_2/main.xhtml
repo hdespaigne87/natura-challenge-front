@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/templates/template_app.xhtml">
 
     <ui:define name="body">
@@ -15,6 +18,20 @@
             <li><p>Should be able to tell at first glance if vitals are normal</p>
             </li>
         </ul>
+
+        <h:form id="form" prependId="false">
+            <p:growl id="growl" showDetail="true" globalOnly="true" />
+            <a href="#" onclick="PF('dlgParameters').show();" style="text-decoration: underline"><h4>View Vital Signs Parameters</h4></a>
+
+            <f:subview id="patientList" rendered="#{userStory2Controller.currentView eq 'PatientList'}">
+                <ui:include src="patients_list.xhtml" />
+            </f:subview>
+            <f:subview id="vitalSignList" rendered="#{userStory2Controller.currentView eq 'VitalSignList'}">
+                <ui:include src="vitalsigns_list.xhtml" />
+            </f:subview>
+        </h:form>
+
+        <ui:include src="/nurseapp/common/dialog_vital_signs_parameters.xhtml" />
     </ui:define>
 
 </ui:composition>

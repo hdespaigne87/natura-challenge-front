@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/template_app.xhtml">
+
+    <ui:define name="body">
+        <h1 id="nurseapp-challenge">NURSEAPP User Story 1</h1>
+        <p>As a nurse, I&#39;d like to be able to store the basic information from the patients I visit each day, so that I can have a historical record of what I do each day.</p>
+        <h4 id="acceptance-criteria-">Acceptance criteria:</h4>
+        <ul>
+        <li><p>Must save Patient&#39;s Name, Age and Vital Signs (blood pressure, heart rate)</p>
+            </li>
+            <li><p>Should be able to see all the information I saved</p>
+            </li>
+            <li><p>Should be able to delete the information I saved</p>
+            </li>
+            <li><p>Must be able to edit the information I saved</p>
+            </li>
+        </ul>
+
+        <h:form id="form" prependId="false">
+            <p:growl id="growl" showDetail="true" globalOnly="true" />
+            <a href="#" onclick="PF('dlgParameters').show();" style="text-decoration: underline"><h4>View Vital Signs Parameters</h4></a>
+
+            <f:subview id="patientList" rendered="#{userStory1Controller.currentView eq 'PatientList'}">
+                <ui:include src="patients_list.xhtml" />
+            </f:subview>
+            <f:subview id="patientForm" rendered="#{userStory1Controller.currentView eq 'PatientForm'}">
+                <ui:include src="patient_form.xhtml" />
+            </f:subview>
+            <f:subview id="vitalSignList" rendered="#{userStory1Controller.currentView eq 'VitalSignList'}">
+                <ui:include src="vitalsigns_list.xhtml" />
+            </f:subview>
+            <f:subview id="vitalSignForm" rendered="#{userStory1Controller.currentView eq 'VitalSignForm'}">
+                <ui:include src="vitalsign_form.xhtml" />
+            </f:subview>
+        </h:form>
+
+        <ui:include src="/nurseapp/common/dialog_vital_signs_parameters.xhtml" />
+    </ui:define>
+
+</ui:composition>

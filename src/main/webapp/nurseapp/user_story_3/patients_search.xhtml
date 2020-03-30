@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="formSearch" prependId="false">
+
+        <p:fieldset legend="Search Patient Evolution Criteria">
+            <div class="ui-fluid">
+                <div class="ui-sm-12 ui-g-3 ui-g-nopad">
+                    <div class="ui-sm-12 ui-g-12">
+                        <p:outputLabel for="dni" value="Introduce your DNI"/>
+                    </div>
+                    <div class="ui-sm-12 ui-g-12">
+                        <p:inputText id="dni" maxlength="100" value="#{userStory3Controller.patientDNI}"
+                                     required="true" requiredMessage="Required field">
+                        </p:inputText>
+                        <span class="help-block">
+                            <p:message for="dni"/>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <br/>
+            <br/>
+            <div id="main-buttons">
+                <p:commandButton value="Search" update="@form groupDashboard" icon="fa fa-check" actionListener="#{userStory3Controller.viewDashboard}"
+                                 styleClass="btn-primary"/>
+                <p:spacer width="5"/>
+                <p:commandButton value="Clear" styleClass="btn-fatal"
+                                 actionListener="#{userStory3Controller.clearDashboard}" process="@this"
+                                 update="@form groupDashboard"
+                                 icon="fa fa-eraser"/>
+            </div>
+        </p:fieldset>
+    </h:form>
+</ui:composition>

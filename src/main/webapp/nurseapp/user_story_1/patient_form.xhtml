@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <div class="ui-fluid">
+        <p:fieldset legend="Patient Data">
+            <div class="ui-sm-12 ui-g-4 ui-g-nopad">
+                <div class="ui-sm-12 ui-g-12">
+                    <p:outputLabel for="dni" value="DNI"/>
+                </div>
+                <div class="ui-sm-12 ui-g-12">
+                    <p:inputText id="dni" maxlength="10" value="#{userStory1Controller.patient.dni}"
+                                 required="true" requiredMessage="Required field">
+                    </p:inputText>
+                    <span class="help-block"> 
+                        <p:message for="dni"/>
+                    </span>
+                </div>
+            </div>
+            <div class="ui-sm-12 ui-g-4 ui-g-nopad">
+                <div class="ui-sm-12 ui-g-12">
+                    <p:outputLabel for="name" value="Name"/>
+                </div>
+                <div class="ui-sm-12 ui-g-12">
+                    <p:inputText id="name" maxlength="100" value="#{userStory1Controller.patient.name}"
+                                 required="true" requiredMessage="Required field">
+                    </p:inputText>
+                    <span class="help-block">
+                        <p:message for="name"/>
+                    </span>
+                </div>
+            </div>
+            <div class="ui-sm-12 ui-g-4 ui-g-nopad">
+                <div class="ui-sm-12 ui-g-12">
+                    <p:outputLabel for="age" value="Age (Years old)"/>
+                </div>
+                <div class="ui-sm-12 ui-g-12">
+                    <p:inputNumber id="age" maxValue="150" minValue="0" decimalPlaces="0" value="#{userStory1Controller.patient.age}"
+                                 required="true" requiredMessage="Required field">
+                    </p:inputNumber>
+                    <span class="help-block">
+                        <p:message for="age"/>
+                    </span>
+                </div>
+            </div>
+        </p:fieldset>
+    </div>
+
+    <p:separator/>
+    <div id="main-buttons">
+        <p:commandButton value="Save" update="@form" icon="fa fa-check" actionListener="#{userStory1Controller.savePatient()}"
+                         styleClass="btn-primary"/>
+        <p:spacer width="5"/>
+        <p:commandButton value="Go Back" styleClass="btn-fatal"
+                  actionListener="#{userStory1Controller.cancelPatientForm}" process="@this"
+                  update="@form"
+                  icon="fa fa-reply"/>
+    </div>
+
+</ui:composition>

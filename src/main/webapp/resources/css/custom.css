@@ -8,3 +8,12 @@
 section.content-header {
 	display: none;
 }
+
+.ui-datalist-data {
+	height:150px;
+	overflow:auto;
+}
+
+input[type="text"]:disabled {
+	opacity: inherit;
+}

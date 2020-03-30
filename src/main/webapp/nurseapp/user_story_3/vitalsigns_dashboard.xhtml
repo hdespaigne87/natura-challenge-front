@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:spacer height="5"/>
+    <p:fieldset legend="Patient Data">
+        <div class="ui-fluid">
+            <div class="ui-sm-12 ui-g-4 ui-g-nopad">
+                <div class="ui-sm-12 ui-g-12">
+                    <p:outputLabel for="dni" value="DNI"/>
+                </div>
+                <div class="ui-sm-12 ui-g-12">
+                    <p:inputText id="dni" value="#{userStory3Controller.patient.dni}"
+                                 disabled="true">
+                    </p:inputText>
+                    <span class="help-block">
+                        <p:message for="dni"/>
+                    </span>
+                </div>
+            </div>
+            <div class="ui-sm-12 ui-g-4 ui-g-nopad">
+                <div class="ui-sm-12 ui-g-12">
+                    <p:outputLabel for="name" value="Name"/>
+                </div>
+                <div class="ui-sm-12 ui-g-12">
+                    <p:inputText id="name" value="#{userStory3Controller.patient.name}"
+                                 disabled="true">
+                    </p:inputText>
+                    <span class="help-block">
+                        <p:message for="name"/>
+                    </span>
+                </div>
+            </div>
+            <div class="ui-sm-12 ui-g-4 ui-g-nopad">
+                <div class="ui-sm-12 ui-g-12">
+                    <p:outputLabel for="age" value="Age (Years old)"/>
+                </div>
+                <div class="ui-sm-12 ui-g-12">
+                    <p:inputNumber id="age" decimalPlaces="0" value="#{userStory3Controller.patient.age}"
+                                   disabled="true">
+                    </p:inputNumber>
+                    <span class="help-block">
+                        <p:message for="age"/>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </p:fieldset>
+    <p:spacer height="3"/>
+
+    <h:form id="formEvolution" prependId="false">
+        <p:growl id="growl" showDetail="true" globalOnly="true" />
+        <p:fieldset legend="Evolution">
+            <div class="ui-fluid">
+                <div class="ui-sm-12 ui-g-2 ui-g-nopad">
+                    <div class="ui-sm-12 ui-g-2">
+                        <p:outputLabel for="month" value="Month"/>
+                    </div>
+                    <div class="ui-sm-12 ui-g-12">
+                        <p:selectOneMenu id="month" value="#{userStory3Controller.month}"
+                                         required="true" requiredMessage="Required field">
+                            <f:selectItem itemLabel="January" itemValue="1" />
+                            <f:selectItem itemLabel="February" itemValue="2" />
+                            <f:selectItem itemLabel="March" itemValue="3" />
+                            <f:selectItem itemLabel="April" itemValue="4" />
+                            <f:selectItem itemLabel="May" itemValue="5" />
+                            <f:selectItem itemLabel="June" itemValue="6" />
+                            <f:selectItem itemLabel="July" itemValue="7" />
+                            <f:selectItem itemLabel="August" itemValue="8" />
+                            <f:selectItem itemLabel="September" itemValue="9" />
+                            <f:selectItem itemLabel="October" itemValue="10" />
+                            <f:selectItem itemLabel="November" itemValue="11" />
+                            <f:selectItem itemLabel="December" itemValue="12" />
+                        </p:selectOneMenu>
+                        <span class="help-block">
+                            <p:message for="month"/>
+                        </span>
+                    </div>
+                </div>
+                <div class="ui-sm-12 ui-g-2 ui-g-nopad">
+                    <div class="ui-sm-12 ui-g-12">
+                        <p:outputLabel for="year" value="Year"/>
+                    </div>
+                    <div class="ui-sm-12 ui-g-12">
+                        <p:inputNumber id="year" decimalPlaces="0" thousandSeparator="" minValue="0" maxValue="9999" value="#{userStory3Controller.year}"
+                        required="true" requiredMessage="Required field">
+                        </p:inputNumber>
+                        <span class="help-block">
+                            <p:message for="year"/>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <br/>
+            <br/>
+            <div id="main-buttons">
+                <p:commandButton value="Search" update="@form" icon="fa fa-search" actionListener="#{userStory3Controller.createChartModels}"
+                                 styleClass="btn-primary"/>
+            </div>
+
+            <div class="ui-fluid">
+                <div class="ui-sm-12 ui-g-12 ui-g-nopad">
+                    <div class="ui-sm-12 ui-g-12">
+                        <p:chart type="line" model="#{userStory3Controller.chartBloodPressure}" style="height:300px;"
+                            rendered="#{userStory3Controller.showCharts}"/>
+                    </div>
+                </div>
+                <div class="ui-sm-12 ui-g-12 ui-g-nopad">
+                    <div class="ui-sm-12 ui-g-12">
+                        <p:chart type="line" model="#{userStory3Controller.chartHeartRate}" style="height:300px;"
+                                 rendered="#{userStory3Controller.showCharts}"/>
+                    </div>
+                </div>
+            </div>
+        </p:fieldset>
+    </h:form>
+    <p:spacer height="3"/>
+
+    <p:fieldset legend="Vital Signs">
+        <div id="datatable">
+            <ul>
+                <li><p>For filter some records, write your search criteria into the boxes and press Enter</p>
+                </li>
+                <li><p>Expand or colapse a row to see the record details</p>
+                </li>
+            </ul>
+            <p:dataTable var="record"
+                         value="#{userStory3Controller.vitalSigns}"
+                         widgetVar="tableVitalSign" paginator="true" styleClass="header-right"
+                         currentPageReportTemplate="{startRecord} - {endRecord} de {totalRecords}"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15" rows="10" rowKey="#{record.id}"
+                         lazy="true">
+
+                <p:column style="width:35px">
+                    <p:rowToggler />
+                </p:column>
+
+                <p:ajax event="rowToggle" listener="#{userStory2Controller.onRowToggle}" />
+
+                <p:column filterBy="#{record.registrationMoment}"
+                          sortBy="#{record.registrationMoment}" headerText="Registration Moment"
+                          priority="1">
+                    <f:facet name="filter">
+                        <p:calendar pattern="MM/dd/yyyy"
+                                    onkeypress="if (event.keyCode == 13) { this.blur(); return false; }"
+                                    mask="99/99/9999">
+                            <p:ajax oncomplete="PF('tableVitalSign').filter()" />
+                            <p:ajax event="dateSelect" oncomplete="PF('tableVitalSign').filter()" />
+                        </p:calendar>
+                    </f:facet>
+                    <p:outputLabel value="#{record.registrationMoment}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm"/>
+                    </p:outputLabel>
+                </p:column>
+
+                <p:column sortBy="#{record.bloodPressureSystolic}" headerText="Blood Pressure Systolic"
+                          priority="1">
+                    <p:outputLabel value="#{record.bloodPressureSystolic}"/>
+                </p:column>
+
+                <p:column sortBy="#{record.bloodPressureDiastolic}" headerText="Blood Pressure Diastolic"
+                          priority="1">
+                    <p:outputLabel value="#{record.bloodPressureDiastolic}"/>
+                </p:column>
+
+                <p:column sortBy="#{record.heartRate}" headerText="Heart Rate"
+                          priority="1">
+                    <p:outputLabel value="#{record.heartRate}"/>
+                </p:column>
+
+                <p:rowExpansion>
+                    <center>
+                        <h3>Vital Signs Evaluation</h3>
+                        <p>This evaluation is based on the parameters referenced at the beginning of this page</p>
+                        <p><b>Blood Pressure:</b> #{record.evaluation.bloodPressure}</p>
+                        <p><b>Heart Rate:</b> #{record.evaluation.heartRate}</p>
+                    </center>
+                </p:rowExpansion>
+            </p:dataTable>
+        </div>
+    </p:fieldset>
+</ui:composition>

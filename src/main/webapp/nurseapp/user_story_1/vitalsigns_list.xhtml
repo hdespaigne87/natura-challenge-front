@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <p:fieldset legend="Patient Data">
+        <div class="ui-fluid">
+            <div class="ui-sm-12 ui-g-4 ui-g-nopad">
+                <div class="ui-sm-12 ui-g-12">
+                    <p:outputLabel for="dni" value="DNI"/>
+                </div>
+                <div class="ui-sm-12 ui-g-12">
+                    <p:inputText id="dni" value="#{userStory1Controller.patient.dni}"
+                                 disabled="true">
+                    </p:inputText>
+                    <span class="help-block">
+                        <p:message for="dni"/>
+                    </span>
+                </div>
+            </div>
+            <div class="ui-sm-12 ui-g-4 ui-g-nopad">
+                <div class="ui-sm-12 ui-g-12">
+                    <p:outputLabel for="name" value="Name"/>
+                </div>
+                <div class="ui-sm-12 ui-g-12">
+                    <p:inputText id="name" value="#{userStory1Controller.patient.name}"
+                                 disabled="true">
+                    </p:inputText>
+                    <span class="help-block">
+                        <p:message for="name"/>
+                    </span>
+                </div>
+            </div>
+            <div class="ui-sm-12 ui-g-4 ui-g-nopad">
+                <div class="ui-sm-12 ui-g-12">
+                    <p:outputLabel for="age" value="Age (Years old)"/>
+                </div>
+                <div class="ui-sm-12 ui-g-12">
+                    <p:inputNumber id="age" decimalPlaces="0" value="#{userStory1Controller.patient.age}"
+                                   disabled="true">
+                    </p:inputNumber>
+                    <span class="help-block">
+                        <p:message for="age"/>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </p:fieldset>
+    <p:spacer height="3"/>
+    <p:fieldset legend="Vital Signs">
+        <div id="datatable">
+            <div class="row">
+                <div class="col-sm-12 col-md-3">
+                    <p:commandButton styleClass="btn-block btn-primary" value="Register Vital Signs"
+                                     actionListener="#{userStory1Controller.callNewVitalSign}"
+                                     update="@form"
+                                     icon="fa fa-plus"/>
+                    <p:spacer></p:spacer>
+                </div>
+            </div>
+            <p>For filter some records, write your search criteria into the boxes and press Enter</p>
+            <p:dataTable var="record"
+                         value="#{userStory1Controller.vitalSigns}"
+                         widgetVar="tableVitalSign" paginator="true" styleClass="header-right"
+                         currentPageReportTemplate="{startRecord} - {endRecord} de {totalRecords}"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15" rows="10" rowKey="#{record.id}"
+                         lazy="true">
+
+                <p:column filterBy="#{record.registrationMoment}"
+                          sortBy="#{record.registrationMoment}" headerText="Registration Moment"
+                          priority="1">
+                    <f:facet name="filter">
+                        <p:calendar pattern="MM/dd/yyyy"
+                                    onkeypress="if (event.keyCode == 13) { this.blur(); return false; }"
+                                    mask="99/99/9999">
+                            <p:ajax oncomplete="PF('tableVitalSign').filter()" />
+                            <p:ajax event="dateSelect" oncomplete="PF('tableVitalSign').filter()" />
+                        </p:calendar>
+                    </f:facet>
+                    <p:outputLabel value="#{record.registrationMoment}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm"/>
+                    </p:outputLabel>
+                </p:column>
+
+                <p:column sortBy="#{record.bloodPressureSystolic}" headerText="Blood Pressure Systolic"
+                          priority="1">
+                    <p:outputLabel value="#{record.bloodPressureSystolic}"/>
+                </p:column>
+
+                <p:column sortBy="#{record.bloodPressureDiastolic}" headerText="Blood Pressure Diastolic"
+                          priority="1">
+                    <p:outputLabel value="#{record.bloodPressureDiastolic}"/>
+                </p:column>
+
+                <p:column sortBy="#{record.heartRate}" headerText="Heart Rate"
+                          priority="1">
+                    <p:outputLabel value="#{record.heartRate}"/>
+                </p:column>
+
+                <p:column headerText="Actions" width="100">
+                    <p:commandButton icon="fa fa-pencil" title="Edit"
+                                     styleClass="btn-primary"
+                                     actionListener="#{userStory1Controller.callEditVitalSign(record)}"
+                                     update="@form">
+                    </p:commandButton>
+                    <p:spacer width="5"/>
+                    <p:commandButton icon="fa fa-trash" title="Delete"
+                                     styleClass="btn-fatal"
+                                     actionListener="#{userStory1Controller.deleteVitalSign(record.id)}"
+                                     update="@form">
+                        <p:confirm header="Confirm"
+                                   message="¿Are you sure about this operation?"
+                                   icon="pi pi-exclamation-triangle"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </div>
+
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+            <p:commandButton value="Yes" type="button"
+                             styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+            <p:commandButton value="No" type="button"
+                             styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
+        </p:confirmDialog>
+    </p:fieldset>
+
+    <p:separator/>
+    <div id="main-buttons">
+        <p:commandButton value="Go Back" styleClass="btn-fatal"
+                  actionListener="#{userStory1Controller.cancelVitalSignList}" process="@this"
+                  update="@form"
+                  icon="fa fa-reply"/>
+    </div>
+
+</ui:composition>

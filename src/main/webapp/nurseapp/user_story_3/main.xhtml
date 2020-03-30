@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
                 template="/WEB-INF/templates/template_app.xhtml">
 
     <ui:define name="body">
@@ -13,6 +15,15 @@
             <li><p>Should be able to see it in a graph to see the evolution of health indicators.</p>
             </li>
         </ul>
+
+        <h:panelGroup id="groupDashboard">
+            <f:subview id="patientSearch">
+                <ui:include src="patients_search.xhtml" />
+            </f:subview>
+            <f:subview id="dashboard" rendered="#{userStory3Controller.currentView eq 'Dashboard'}">
+                <ui:include src="vitalsigns_dashboard.xhtml" />
+            </f:subview>
+        </h:panelGroup>
     </ui:define>
 
 </ui:composition>
