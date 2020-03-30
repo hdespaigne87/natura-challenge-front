@@ -44,6 +44,7 @@ public class SmallestLargestNumberController implements Serializable {
 
     public void clearList() {
         listNumbers = new ArrayList<>();
+        result = null;
     }
 
     public void findSmallestLargestNumber() {
