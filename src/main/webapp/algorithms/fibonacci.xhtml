@@ -56,6 +56,15 @@
                     <div class="ui-fluid">
                         <div class="ui-sm-12 ui-g-12 ui-g-nopad">
                             <div class="ui-sm-12 ui-g-12">
+                                <p:outputLabel value="Time (miliseconds): " style="font-weight: bold">
+                                    <p:outputLabel value="#{fibonacciController.result.timeInMiliseconds}">
+                                        <f:convertNumber type="number" groupingUsed="false" />
+                                    </p:outputLabel>
+                                </p:outputLabel>
+                            </div>
+                        </div>
+                        <div class="ui-sm-12 ui-g-12 ui-g-nopad">
+                            <div class="ui-sm-12 ui-g-12">
                                 <p:outputLabel for="result" value="Fibonacci Result"/>
                             </div>
                             <div class="ui-sm-12 ui-g-12">
@@ -65,15 +74,6 @@
                                 <span class="help-block">
                                     <p:message for="result"/>
                                 </span>
-                            </div>
-                        </div>
-                        <div class="ui-sm-12 ui-g-12 ui-g-nopad">
-                            <div class="ui-sm-12 ui-g-12">
-                                <p:outputLabel value="Time (miliseconds): " style="font-weight: bold">
-                                    <p:outputLabel value="#{fibonacciController.result.timeInMiliseconds}">
-                                        <f:convertNumber type="number" groupingUsed="false" />
-                                    </p:outputLabel>
-                                </p:outputLabel>
                             </div>
                         </div>
                     </div>
